@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - CyberSec Toolkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>📊 Dashboard</h1>
+    <p>Welcome to CyberSec Toolkit Control Panel</p>
+
+    <div class="tools">
+        <button class="btn" onclick="lookupIP()">🌐 IP Lookup</button>
+        <button class="btn" onclick="passwordCheck()">🔐 Password Checker</button>
+        <button class="btn" onclick="hashGen()">🔑 Hash Generator</button>
+    </div>
+</div>
+
+<script>
+function lookupIP() {
+    let ip = prompt("Enter IP address:");
+    if (!ip) return;
+
+    fetch("/ip-lookup?ip=" + ip)
+    .then(res => res.json())
+    .then(data => {
+        alert(
+            "IP: " + data.query + "\n" +
+            "Country: " + data.country + "\n" +
+            "City: " + data.city + "\n" +
+            "ISP: " + data.org
+        );
+    })
+    .catch(() => alert("Error fetching IP data"));
+}
+
+function passwordCheck() {
+    let pass = prompt("Enter password:");
+    if (!pass) return;
+
+    let strength = "Weak";
+    if (pass.length >= 8) strength = "Medium";
+    if (pass.length >= 12) strength = "Strong";
+
+    alert("Password Strength: " + strength);
+}
+
+function hashGen() {
+    let text = prompt("Enter text:");
+    if (!text) return;
+
+    let hash = btoa(text);
+    alert("Base64 Hash (demo): " + hash);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - CyberSec Toolkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>📊 Dashboard</h1>
+    <p>Welcome to CyberSec Toolkit Control Panel</p>
+
+    <div class="tools">
+        <button class="btn" onclick="lookupIP()">🌐 IP Lookup</button>
+        <button class="btn" onclick="passwordCheck()">🔐 Password Checker</button>
+        <button class="btn" onclick="hashGen()">🔑 Hash Generator</button>
+		<button class="btn" onclick="lookupMyIP()">🌍 My Real IP Info</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
