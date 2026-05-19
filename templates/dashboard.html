@@ -1,60 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - CyberSec Toolkit</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
     <h1>📊 Dashboard</h1>
-    <p>Welcome to CyberSec Toolkit Control Panel</p>
 
     <div class="tools">
         <button class="btn" onclick="lookupIP()">🌐 IP Lookup</button>
+        <button class="btn" onclick="lookupMyIP()">🌍 My Real IP</button>
         <button class="btn" onclick="passwordCheck()">🔐 Password Checker</button>
         <button class="btn" onclick="hashGen()">🔑 Hash Generator</button>
     </div>
 </div>
 
-<script>
-function lookupIP() {
-    let ip = prompt("Enter IP address:");
-    if (!ip) return;
+<!-- RESULT -->
+<div id="resultBox" class="result-box" style="display:none;">
+<div class="result-box">
+    <h3>📜 IP History</h3>
+    <ul id="logList"></ul>
+</div>
+    <h3>IP Result</h3>
 
-    fetch("/ip-lookup?ip=" + ip)
-    .then(res => res.json())
-    .then(data => {
-        alert(
-            "IP: " + data.query + "\n" +
-            "Country: " + data.country + "\n" +
-            "City: " + data.city + "\n" +
-            "ISP: " + data.org
-        );
-    })
-    .catch(() => alert("Error fetching IP data"));
-}
+    <p><b>IP:</b> <span id="ip"></span></p>
+    <p><b>Country:</b> <span id="country"></span></p>
+    <p><b>City:</b> <span id="city"></span></p>
+    <p><b>ISP:</b> <span id="isp"></span></p>
 
-function passwordCheck() {
-    let pass = prompt("Enter password:");
-    if (!pass) return;
+    <img id="flag" width="80"><br><br>
 
-    let strength = "Weak";
-    if (pass.length >= 8) strength = "Medium";
-    if (pass.length >= 12) strength = "Strong";
+    <a id="mapLink" target="_blank" class="btn">Open Map</a>
+</div>
 
-    alert("Password Strength: " + strength);
-}
-
-function hashGen() {
-    let text = prompt("Enter text:");
-    if (!text) return;
-
-    let hash = btoa(text);
-    alert("Base64 Hash (demo): " + hash);
-}
-</script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>

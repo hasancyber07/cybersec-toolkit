@@ -1,9 +1,10 @@
 import requests
+import datetime
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 
-# ---------------- PAGES ----------------
+# ----------- PAGES -----------
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -16,8 +17,7 @@ def login_page():
 def dashboard():
     return render_template("dashboard.html")
 
-
-# ---------------- LOGIN ----------------
+# ----------- LOGIN -----------
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
@@ -28,8 +28,7 @@ def login():
     else:
         return "Login failed ❌"
 
-
-# ---------------- IP LOOKUP ----------------
+# ----------- IP LOOKUP -----------
 @app.route('/ip-lookup')
 def ip_lookup():
     ip = request.args.get('ip')
@@ -38,8 +37,29 @@ def ip_lookup():
         return jsonify({"error": "No IP provided"})
 
     response = requests.get(f"http://ip-api.com/json/{ip}")
-    return jsonify(response.json())
+    data = response.json()
 
+    # LOG SAVE
+    with open("../logs/activity.log", "a") as f:
+        f.write(f"{datetime.datetime.now()} - IP checked: {ip}\n")
+
+    return jsonify(data)
+    # ----------- GET LOGS -----------
+@app.route('/logs')
+def get_logs():
+    logs = []
+
+    try:
+        with open("../logs/activity.log", "r") as f:
+            lines = f.readlines()
+
+            for line in lines[-10:]:  # son 10 log
+                logs.append(line.strip())
+
+    except:
+        logs = ["No logs yet"]
+
+    return jsonify(logs)
 
 if __name__ == '__main__':
     app.run(debug=True)
