@@ -1,3 +1,4 @@
+import os
 import requests
 import datetime
 from flask import Flask, request, jsonify, render_template, redirect, url_for
@@ -62,4 +63,4 @@ def get_logs():
     return jsonify(logs)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000)
