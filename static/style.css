@@ -25,3 +25,29 @@ body {
     padding: 20px;
     border: 1px solid #22c55e;
 }
+#strengthBar {
+    margin-top: 10px;
+    transition: 0.3s;
+}
+.terminal {
+    margin-top: 40px;
+    padding: 20px;
+    background: black;
+    color: lime;
+    font-family: monospace;
+}
+
+#terminalOutput {
+    height: 200px;
+    overflow-y: auto;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#terminalInput {
+    width: 100%;
+    padding: 10px;
+    background: black;
+    color: lime;
+    border: 1px solid lime;
+}

@@ -10,10 +10,20 @@
     <h1>📊 Dashboard</h1>
 
     <div class="tools">
+	<div class="result-box">
+    <h3>🔐 Password Strength Checker</h3>
+
+    <input type="text" id="passwordInput" placeholder="Enter password">
+    
+    <div id="strengthBar" style="height:10px; width:0%; background:red;"></div>
+
+    <p id="strengthText"></p>
+</div>
         <button class="btn" onclick="lookupIP()">🌐 IP Lookup</button>
         <button class="btn" onclick="lookupMyIP()">🌍 My Real IP</button>
         <button class="btn" onclick="passwordCheck()">🔐 Password Checker</button>
         <button class="btn" onclick="hashGen()">🔑 Hash Generator</button>
+		
     </div>
 </div>
 
@@ -36,6 +46,12 @@
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<div class="terminal">
+    <h3>💀 Cyber Terminal</h3>
 
+    <div id="terminalOutput"></div>
+
+    <input type="text" id="terminalInput" placeholder="Type command...">
+</div>
 </body>
 </html>
